@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<robot name="plane_with_box">
+  <link name="planeLink">
+    <contact>
+        <lateral_friction value="1"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value=".0"/>
+        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="/home/fabio/.local/lib/python3.8/site-packages/pybullet_data/plane.obj"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -5"/>
+      <geometry>
+        <box size="30 30 10"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="boxLink">
+    <contact>
+        <lateral_friction value="1"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	    <box size="0.5 0.5 0.5"/>
+      </geometry>
+      <material name ="">
+        <color rgba="0.9 0.4 0.4 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	    <box size="0.5 0.5 0.5"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="box1">
+    <contact>
+        <lateral_friction value="1"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0.6 0.27 0.8"/>
+       <mass value="0.1"/>
+       <inertia ixx="0.001" ixy="" ixz="0" iyy="0.0015" iyz="0" izz="0.002"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	    <box size="0.02 0.04 0.02"/>
+      </geometry>
+      <material name ="">
+        <color rgba="0.9 0.4 0.4 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.58 0.23 0.8"/>
+      <geometry>
+	 	    <box size="0.04 0.08 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="boxPlane" type ="fixed">
+    <parent link="planeLink"/>
+    <child link="boxLink"/>
+    <origin xyz="0.25 0.25 0.25" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="box_c1" type ="prismatic">
+    <parent link="planeLink"/>
+    <child link="box1"/>
+    <origin xyz="0.58 0.23 0.8" rpy="0 0 0"/>
+    <axis xyz="0 0 1" />
+    <limit effort="10" lower="0" upper="0.3" velocity="0.1"/>
+
+  <!-- <joint name="box_c1_occ" type ="prismatic">
+
+    <parent link="planeLink"/>
+    <child link="box1"/>
+    <origin xyz="0.54 0.34 0.51" rpy="0 0 0"/>
+    <axis xyz="0 0 1" />
+    <limit effort="10" lower="0" upper="0.3" velocity="0.1"/> -->
+
+  </joint>
+
+
+</robot>
